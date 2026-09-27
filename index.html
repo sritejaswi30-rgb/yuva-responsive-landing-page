@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ============================================================
+       META & DOCUMENT SETUP
+       - charset + viewport are required for a responsive page;
+         without viewport the mobile browser renders at ~980px
+         and scales the whole desktop layout down.
+       - theme-color tints the mobile browser chrome to match
+         the brand header.
+       ============================================================ -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Yuva is a learning and career accelerator that helps young people build real skills, ship real projects and land their first role.">
+  <meta name="theme-color" content="#12141c">
+  <title>Yuva — Build skills that actually get you hired</title>
+
+  <!-- Google Fonts. Preconnect shaves a round-trip off the font load.
+       `display=swap` means text paints immediately in the fallback font
+       instead of staying invisible (FOIT) while the webfont downloads. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Flag that JS is running. The reveal-on-scroll animation hides its
+       elements in CSS, so it must ONLY apply when this class exists —
+       otherwise a JS failure (or JS being blocked) would leave the whole
+       page invisible. Set before the stylesheet to avoid a flash.
+       The timeout is a safety net: if main.js never reports back within
+       2.5s, the class is dropped and the content shows anyway. -->
+  <script>
+    document.documentElement.classList.add("js");
+    window.__revealFallback = setTimeout(function () {
+      if (!document.documentElement.classList.contains("js-ready")) {
+        document.documentElement.classList.remove("js");
+      }
+    }, 2500);
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Inline SVG favicon: no extra HTTP request, no 404 in the console. -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128640;</text></svg>">
+</head>
+
+<body>
+  <!-- Skip link: first focusable element on the page so keyboard users can
+       jump straight past the header navigation. -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- ============================================================
+       HEADER / NAVIGATION
+       Semantic <header> + <nav>. The button controls the menu via
+       aria-controls -> id of the <nav> element.
+       ============================================================ -->
+  <header class="site-header" id="site-header">
+    <div class="container header__inner">
+
+      <!-- Brand / logo -->
+      <a class="brand" href="#top" aria-label="Yuva — home">
+        <span class="brand__mark" aria-hidden="true">Y</span>
+        <span class="brand__name">Yuva</span>
+      </a>
+
+      <!-- Hamburger. Only visible below 768px (see CSS).
+           aria-expanded is the contract that tells assistive tech
+           whether the menu is currently open. -->
+      <button class="nav-toggle" type="button"
+              id="nav-toggle"
+              aria-expanded="false"
+              aria-controls="primary-nav">
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+        <span class="visually-hidden">Menu</span>
+      </button>
+
+      <!-- Primary navigation -->
+      <nav class="nav" id="primary-nav" aria-label="Primary">
+        <ul class="nav__list">
+          <li class="nav__item"><a class="nav__link" href="#features">Features</a></li>
+          <li class="nav__item"><a class="nav__link" href="#how-it-works">How it works</a></li>
+          <li class="nav__item"><a class="nav__link" href="#stories">Stories</a></li>
+          <li class="nav__item"><a class="nav__link" href="#faq">FAQ</a></li>
+        </ul>
+        <!-- The nav CTA sits inside the panel on mobile so the primary
+             action is reachable without closing the menu. -->
+        <a class="btn btn--primary nav__cta" href="#cta">Join free</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ============================================================
+         HERO
+         CSS Grid: on desktop it is a 2-column split (copy | visual),
+         on mobile it collapses to a single column with the copy first
+         (source order already favours that, so no DOM reordering needed).
+         ============================================================ -->
+    <section class="hero" id="top">
+      <!-- Decorative blobs are aria-hidden + pointer-events:none so they
+           never show up in the accessibility tree or block clicks. -->
+      <span class="hero__blob hero__blob--one" aria-hidden="true"></span>
+      <span class="hero__blob hero__blob--two" aria-hidden="true"></span>
+
+      <div class="container hero__grid">
+        <div class="hero__copy reveal">
+          <p class="eyebrow">Now enrolling · Batch 12</p>
+
+          <h1 class="hero__title">
+            Build skills that
+            <span class="hero__title-accent">actually get you hired.</span>
+          </h1>
+
+          <p class="hero__lead">
+            Yuva is a 12-week accelerator where young people learn by shipping —
+            real briefs, real reviews, real portfolios — with mentors from
+            product teams, not slide decks.
+          </p>
+
+          <!-- Two CTAs: one primary action, one lower-commitment anchor.
+               Visually differentiated so the hierarchy is obvious. -->
+          <div class="hero__actions">
+            <a class="btn btn--primary btn--lg" href="#cta">Start for free</a>
+            <a class="btn btn--ghost btn--lg" href="#how-it-works">See how it works</a>
+          </div>
+
+          <!-- Trust row: social proof placed above the fold. -->
+          <div class="trust">
+            <div class="trust__avatars" aria-hidden="true">
+              <span class="trust__avatar">AR</span>
+              <span class="trust__avatar">MJ</span>
+              <span class="trust__avatar">KP</span>
+              <span class="trust__avatar">+9k</span>
+            </div>
+            <p class="trust__text">
+              <strong>4.9/5</strong> from 9,000+ learners across 40 cities
+            </p>
+          </div>
+        </div>
+
+        <!-- Hero visual: built from CSS/HTML only, so there is no image
+             payload and nothing to break at odd aspect ratios. -->
+        <div class="hero__visual reveal" aria-hidden="true">
+          <div class="mock-card">
+            <div class="mock-card__head">
+              <span class="mock-card__dot"></span>
+              <span class="mock-card__dot"></span>
+              <span class="mock-card__dot"></span>
+              <span class="mock-card__url">app.yuva.dev/project</span>
+            </div>
+
+            <div class="mock-card__body">
+              <p class="mock-card__label">Week 06 · Capstone</p>
+              <p class="mock-card__title">Redesign a checkout flow</p>
+
+              <div class="progress">
+                <div class="progress__bar"><span style="--fill: 78%"></span></div>
+                <span class="progress__value">78%</span>
+              </div>
+
+              <ul class="mock-list">
+                <li class="mock-list__item mock-list__item--done">Research &amp; user interviews</li>
+                <li class="mock-list__item mock-list__item--done">Wireframes + low-fi prototype</li>
+                <li class="mock-list__item">Usability test (2 rounds)</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Floating stat chips add depth without extra markup cost. -->
+          <div class="chip chip--top">
+            <span class="chip__emoji">⚡</span>
+            <span><strong>+34%</strong> completion</span>
+          </div>
+          <div class="chip chip--bottom">
+            <span class="chip__emoji">🎯</span>
+            <span><strong>3 offers</strong> this week</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PARTNER / LOGO STRIP
+         Purely decorative credibility row. Duplicated list items are
+         hidden from screen readers with aria-hidden on the 2nd copy
+         if we ever turn this into a marquee.
+         ============================================================ -->
+    <section class="partners" aria-label="Hiring partners">
+      <div class="container">
+        <p class="partners__label">Graduates now building at</p>
+        <ul class="partners__list">
+          <li>Northwind</li>
+          <li>Lumen Labs</li>
+          <li>Foundry</li>
+          <li>Bluebird</li>
+          <li>Orbit&nbsp;Studio</li>
+          <li>Kite</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FEATURE HIGHLIGHTS
+         CSS Grid with auto-fit minmax so the same markup produces
+         1 / 2 / 3 columns purely from available width — fewer
+         media queries, less to maintain.
+         ============================================================ -->
+    <section class="section" id="features">
+      <div class="container">
+        <header class="section__header reveal">
+          <p class="eyebrow">Why Yuva</p>
+          <h2 class="section__title">Everything you need, nothing you don't</h2>
+          <p class="section__lead">
+            Six things we obsess over so your 12 weeks compound instead of drift.
+          </p>
+        </header>
+
+        <ul class="feature-grid">
+          <li class="feature-card reveal">
+            <span class="feature-card__icon" aria-hidden="true">🛠️</span>
+            <h3 class="feature-card__title">Project-first curriculum</h3>
+            <p class="feature-card__text">
+              Every module ends in something you can show — a shipped screen,
+              a repo, a 60-second walkthrough.
+            </p>
+          </li>
+
+          <li class="feature-card reveal">
+            <span class="feature-card__icon" aria-hidden="true">🧑‍🏫</span>
+            <h3 class="feature-card__title">Mentors who still ship</h3>
+            <p class="feature-card__text">
+              Weekly 1:1s with practitioners from product teams. Feedback in 48
+              hours, always tied to a specific artifact.
+            </p>
+          </li>
+
+          <li class="feature-card reveal">
+            <span class="feature-card__icon" aria-hidden="true">📈</span>
+            <h3 class="feature-card__title">A portfolio with proof</h3>
+            <p class="feature-card__text">
+              Case studies structured the way hiring panels actually read them:
+              problem, constraint, decision, result.
+            </p>
+          </li>
+
+          <li class="feature-card reveal">
+            <span class="feature-card__icon" aria-hidden="true">🤝</span>
+            <h3 class="feature-card__title">Accountability pods</h3>
+            <p class="feature-card__text">
+              Groups of five, stand-ups three times a week. Miss a beat and your
+              pod notices before the deadline does.
+            </p>
+          </li>
+
+          <li class="feature-card reveal">
+            <span class="feature-card__icon" aria-hidden="true">💼</span>
+            <h3 class="feature-card__title">Hiring partner intros</h3>
+            <p class="feature-card__text">
+              Graduate showcases go straight to 60+ partner teams. No cold
+              applications, no black-hole inboxes.
+            </p>
+          </li>
+
+          <li class="feature-card reveal">
+            <span class="feature-card__icon" aria-hidden="true">♾️</span>
+            <h3 class="feature-card__title">Lifetime alumni access</h3>
+            <p class="feature-card__text">
+              Keep the curriculum, the community and the office hours forever —
+              your first role is a milestone, not the finish line.
+            </p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         HOW IT WORKS
+         Three steps on a horizontal rail at desktop, a vertical
+         numbered rail on mobile (the rail is a ::before pseudo
+         element so no extra markup is needed).
+         ============================================================ -->
+    <section class="section section--alt" id="how-it-works">
+      <div class="container">
+        <header class="section__header reveal">
+          <p class="eyebrow">How it works</p>
+          <h2 class="section__title">Three steps from curious to hired</h2>
+        </header>
+
+        <ol class="steps">
+          <li class="step reveal">
+            <span class="step__num" aria-hidden="true">01</span>
+            <h3 class="step__title">Take the skill sprint</h3>
+            <p class="step__text">
+              A free two-week taster that maps what you already know and where
+              the gaps are.
+            </p>
+          </li>
+          <li class="step reveal">
+            <span class="step__num" aria-hidden="true">02</span>
+            <h3 class="step__title">Join a build cohort</h3>
+            <p class="step__text">
+              Twelve weeks, one capstone, a pod of five and a mentor who reviews
+              your actual work.
+            </p>
+          </li>
+          <li class="step reveal">
+            <span class="step__num" aria-hidden="true">03</span>
+            <h3 class="step__title">Showcase &amp; get introduced</h3>
+            <p class="step__text">
+              Graduate demo day puts your case study in front of partner teams
+              actively hiring.
+            </p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         STATS BAND
+         Full-bleed dark strip. 4 columns on desktop, 2x2 grid on
+         mobile (see .stats__grid media queries).
+         ============================================================ -->
+    <section class="stats" aria-label="Yuva in numbers">
+      <div class="container stats__grid">
+        <div class="stat reveal">
+          <p class="stat__value" data-count="9400">9,400+</p>
+          <p class="stat__label">Learners enrolled</p>
+        </div>
+        <div class="stat reveal">
+          <p class="stat__value" data-count="82">82%</p>
+          <p class="stat__label">Placed within 6 months</p>
+        </div>
+        <div class="stat reveal">
+          <p class="stat__value" data-count="60">60+</p>
+          <p class="stat__label">Hiring partner teams</p>
+        </div>
+        <div class="stat reveal">
+          <p class="stat__value" data-count="40">40</p>
+          <p class="stat__label">Cities represented</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         TESTIMONIALS
+         On mobile this becomes a horizontal scroll-snap track:
+         a native, gesture-driven carousel with zero JavaScript.
+         ============================================================ -->
+    <section class="section" id="stories">
+      <div class="container">
+        <header class="section__header reveal">
+          <p class="eyebrow">Stories</p>
+          <h2 class="section__title">Where they ended up</h2>
+        </header>
+
+        <ul class="quote-track">
+          <li class="quote-card reveal">
+            <blockquote class="quote-card__text">
+              “I came in with a folder of tutorials and left with three case
+              studies. The reviews were brutal in the best way.”
+            </blockquote>
+            <figcaption class="quote-card__by">
+              <span class="quote-card__avatar" aria-hidden="true">SR</span>
+              <span>
+                <strong>Sana R.</strong>
+                <small>Product Designer, Foundry</small>
+              </span>
+            </figcaption>
+          </li>
+
+          <li class="quote-card reveal">
+            <blockquote class="quote-card__text">
+              “The pod is what got me through week nine. Nobody lets you quietly
+              disappear, and that turned out to be the whole trick.”
+            </blockquote>
+            <figcaption class="quote-card__by">
+              <span class="quote-card__avatar" aria-hidden="true">DM</span>
+              <span>
+                <strong>Dev M.</strong>
+                <small>Frontend Engineer, Lumen Labs</small>
+              </span>
+            </figcaption>
+          </li>
+
+          <li class="quote-card reveal">
+            <blockquote class="quote-card__text">
+              “Demo day put me in a room with the team that hired me. Two
+              conversations, one offer, no cold applications.”
+            </blockquote>
+            <figcaption class="quote-card__by">
+              <span class="quote-card__avatar" aria-hidden="true">AK</span>
+              <span>
+                <strong>Aisha K.</strong>
+                <small>Associate PM, Northwind</small>
+              </span>
+            </figcaption>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FAQ  (native <details>/<summary> — accordion semantics,
+         keyboard support and toggle behaviour for free, no JS)
+         ============================================================ -->
+    <section class="section section--alt" id="faq">
+      <div class="container container--narrow">
+        <header class="section__header reveal">
+          <p class="eyebrow">FAQ</p>
+          <h2 class="section__title">Before you ask</h2>
+        </header>
+
+        <div class="faq">
+          <details class="faq__item">
+            <summary class="faq__q">Do I need prior experience?</summary>
+            <p class="faq__a">
+              No. The skill sprint is designed to place you — roughly a third of
+              each cohort is starting from zero.
+            </p>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__q">How much time per week?</summary>
+            <p class="faq__a">
+              Plan for 12–15 hours: two live sessions, three pod stand-ups and
+              build time. Everything is recorded.
+            </p>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__q">What does it cost?</summary>
+            <p class="faq__a">
+              The skill sprint is free. The full cohort has a pay-after-you're-
+              hired option and 200 merit seats every batch.
+            </p>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__q">Is it remote?</summary>
+            <p class="faq__a">
+              Fully async-friendly, with optional in-person demo days in 12
+              cities.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FINAL CTA + NEWSLETTER FORM
+         The form is intercepted by JS (validate + inline status via
+         aria-live). With JS disabled it falls back to a normal GET
+         submission, so the action is never a dead end.
+         ============================================================ -->
+    <section class="cta" id="cta">
+      <div class="container container--narrow cta__inner reveal">
+        <p class="eyebrow eyebrow--light">Free to start</p>
+        <h2 class="cta__title">Your first cohort starts Monday</h2>
+        <p class="cta__lead">
+          Drop your email and we'll send the syllabus, the schedule and one
+          honest checklist for deciding if this is for you.
+        </p>
+
+        <form class="signup" id="signup-form" action="#cta" method="get" novalidate>
+          <label class="visually-hidden" for="signup-email">Email address</label>
+          <input class="signup__input"
+                 type="email"
+                 id="signup-email"
+                 name="email"
+                 placeholder="you@example.com"
+                 autocomplete="email"
+                 required>
+          <button class="btn btn--accent" type="submit">Send the syllabus</button>
+        </form>
+
+        <!-- aria-live="polite" makes the JS status message announced
+             to screen readers without stealing focus. -->
+        <p class="signup__status" id="signup-status" role="status" aria-live="polite"></p>
+
+        <p class="cta__fine">No spam, one email a week, unsubscribe in a click.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       <footer> with a 4-column grid that collapses to 1 column on
+       small screens. Site-wide nav lives here as a second route to
+       every section.
+       ============================================================ -->
+  <footer class="site-footer">
+    <div class="container footer__grid">
+
+      <div class="footer__brand">
+        <a class="brand brand--footer" href="#top">
+          <span class="brand__mark" aria-hidden="true">Y</span>
+          <span class="brand__name">Yuva</span>
+        </a>
+        <p class="footer__blurb">
+          A learning and career accelerator for young people who'd rather ship
+          than spectate.
+        </p>
+        <!-- Inline SVG social icons: crisp at any size, themeable,
+             and no icon-font dependency. -->
+        <ul class="social">
+          <li><a href="#" aria-label="Yuva on X (Twitter)">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M18.9 2H22l-6.8 7.8L23 22h-6.3l-4.9-6.4L6.2 22H3l7.3-8.3L1.5 2h6.4l4.4 5.9L18.9 2Zm-1.1 18h1.7L7.3 3.8H5.5L17.8 20Z"/></svg>
+          </a></li>
+          <li><a href="#" aria-label="Yuva on LinkedIn">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C21.4 8.65 22 11 22 14.1V21h-4v-6.1c0-1.45-.03-3.3-2-3.3-2 0-2.3 1.57-2.3 3.2V21h-4V9Z"/></svg>
+          </a></li>
+          <li><a href="#" aria-label="Yuva on GitHub">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.04 1.53 1.04.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03a9.5 9.5 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.86v2.75c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+          </a></li>
+        </ul>
+      </div>
+
+      <nav class="footer__col" aria-labelledby="footer-product">
+        <h2 class="footer__heading" id="footer-product">Product</h2>
+        <ul class="footer__list">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how-it-works">How it works</a></li>
+          <li><a href="#cta">Pricing</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__col" aria-labelledby="footer-company">
+        <h2 class="footer__heading" id="footer-company">Company</h2>
+        <ul class="footer__list">
+          <li><a href="#stories">Stories</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__col" aria-labelledby="footer-resources">
+        <h2 class="footer__heading" id="footer-resources">Resources</h2>
+        <ul class="footer__list">
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Syllabus</a></li>
+          <li><a href="#">Community</a></li>
+          <li><a href="#">Support</a></li>
+        </ul>
+      </nav>
+
+    </div>
+
+    <div class="container footer__bottom">
+      <p>&copy; <span id="year">2026</span> Yuva Labs. All rights reserved.</p>
+      <ul class="footer__legal">
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Cookies</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- `defer` keeps the script non-blocking (page renders first) while
+       guaranteeing the DOM is parsed before it runs — so we don't need
+       a DOMContentLoaded wrapper for the top-level code. -->
+  <script src="js/main.js" defer></script>
+</body>
+</html>

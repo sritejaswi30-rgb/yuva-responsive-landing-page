@@ -1,0 +1,24 @@
+# ---------------------------------------------------------------------------
+# YuvaIntern Week 1 — Responsive Landing Page
+# Only transient / machine-local files are ignored. Everything that makes up
+# the project (HTML, CSS, JS, README, wireframe, report, screenshots, tests)
+# is deliberately tracked.
+# ---------------------------------------------------------------------------
+
+# Transient screenshots written by tests/test_page.py while it runs.
+# (The curated captures in screenshots/ ARE tracked.)
+shots/
+
+# Python — only used by the optional test scripts
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.log

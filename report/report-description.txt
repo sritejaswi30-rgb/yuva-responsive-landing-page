@@ -1,0 +1,36 @@
+REPORT DESCRIPTION (paste into the submission form — 300 words)
+==============================================================
+
+This report documents the end-to-end design and development of "Yuva", a fully
+responsive, single-page landing site built from scratch with semantic HTML5,
+modern CSS and vanilla JavaScript. The submission follows the task's workflow:
+wireframe first, then markup, styling, interactivity and cross-device testing.
+
+The report opens with the low-fidelity wireframe I sketched before writing any
+code. It shows the desktop and mobile layouts as ASCII block diagrams — sticky
+header with navigation, two-column hero, partner strip, six-card feature grid,
+three-step process rail, statistics band, testimonials, FAQ, call-to-action
+panel and a four-column footer — plus the breakpoint strategy (mobile-first at
+base, then 480px, 768px, 1024px and 1280px) and the interaction inventory.
+
+The development section explains the technical choices and why they were made:
+semantic landmark elements (<header>, <nav>, <main>, <section>, <footer>) for
+accessibility and SEO; CSS Grid with `auto-fit/minmax()` for self-flowing card
+grids; Flexbox for the header, action rows and footer; `clamp()` fluid
+typography so headings scale without font-size media queries; CSS custom
+properties for a single-source design token system; and scroll-snap CSS for the
+mobile testimonial carousel, which needs no JavaScript.
+
+The JavaScript layer covers progressive enhancement only: an accessible
+hamburger toggle driven by aria-expanded with Escape and outside-click
+dismissal, a sticky-header shadow, IntersectionObserver-based active-link
+highlighting and reveal animations, client-side newsletter validation with
+aria-live status messages, and an auto-updating footer year. Fail-safe design
+means the page stays fully readable if JavaScript is blocked.
+
+Testing ran in headless Chromium across eleven viewport widths from 320px to
+1920px, confirming zero horizontal overflow, zero console errors, correct
+breakpoint behaviour and passing interaction checks for the menu, form, FAQ and
+scroll states. The report closes with the file structure, how to run the page
+locally, and reflections on accessibility, performance and what I would improve
+next.
