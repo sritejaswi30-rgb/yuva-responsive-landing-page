@@ -11,13 +11,19 @@ properties, media queries) · vanilla JavaScript.
 
 ## Run it
 
+Serving over HTTP (recommended — avoids any `file://` edge cases):
+
 ```bash
-# easiest: double-click index.html
-# or serve it (avoids any file:// edge cases)
-npx serve .          # or: python -m http.server 8000
+python -m http.server 5500 --bind 127.0.0.1
+# alternative: npx serve -l 5500 .
 ```
 
-Then open <http://localhost:8000>.
+Then open <http://localhost:5500/>.
+
+> Port **5500** is used on purpose: **8000 is already taken** by another local
+> service on this machine. If 5500 is busy, pick any free port
+> (`python -m http.server 5501`) — the page has no port-specific code.
+> Double-clicking `index.html` also works, without a server.
 
 ---
 
